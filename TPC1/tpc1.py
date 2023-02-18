@@ -21,12 +21,33 @@ def read_csv_file(filename):
             #print(data)
     return data
 
-data = read_csv_file("myheart.csv")
+#data = read_csv_file("myheart.csv")
 
 #data é uma lista de dicionarios com entradas como a seguinte, representa todo o csv
 # {'idade': '54', 'sexo': 'F', 'tensão': '120', 'colesterol': '273', 'batimento': '150', 'temDoença': '0'}
 
 #agora, vou percorrer a lista de dicionarios adicionando info pertinente a outros dicionarios
+
+
+#descobri depois que nao podia usar o modulo csv, então vou criar uma funcao que faça o mesmo que a read_csv_file
+
+def CSVtoMap(filename):
+    res=[]
+    with open(filename, 'r', encoding="utf8") as csv_file:
+        lines = csv_file.read().split('\n')
+        keys = lines[0].split(',')
+        for i in range(1, len(lines)):
+            line = lines[i]
+            if not line:
+                continue
+            values = line.split(',')
+            dic = {}
+            for j in range(0, len(keys)):
+                dic[keys[j]] = values[j]
+            res.append(dic)
+    return res
+
+data = CSVtoMap("myheart.csv")
 
 def pessoas_por_genero(data):
     res = {
