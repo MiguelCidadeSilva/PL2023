@@ -8,6 +8,8 @@
 #Extra: explore o módulo matplotlib e crie gráficos para as suas distribuições
 
 import csv
+import matplotlib.pyplot as plt
+
 
 
 def read_csv_file(filename):
@@ -291,6 +293,34 @@ def mapatotabela(dicionario):
         print("{:<40} {:<40}".format(k,dicionario[k]))
 
 
+def histograma(dicionario):
+    plt.bar(dicionario.keys(), dicionario.values())
+    plt.xticks(rotation=90)
+    plt.ylabel('Frequencia')
+    plt.title('Histograma')
+    plt.show()
+
+
+def regressar():
+    print("Regressar?[S/N]")
+    while(True):
+        op2 = (input())
+        if op2 == "S": menu()
+        if op2 == "N": exit()
+
+def graficamente():
+    print("1-Grafico de doentes por sexo")
+    print("2-Grafico de doentes por faixa etária")
+    print("3-Gráfico de doentes por colestrol")
+    op = int(input())
+    if op == 1:
+        histograma(doentesPorGenero)
+    elif op == 2:
+        histograma(doentesFaixasetarias)
+    elif op == 3:
+        histograma(dicColestrol)
+    regressar()
+
 def menu():
     print("Selecione uma opção: ")
     print("1-Ver total de cada sexo")
@@ -301,6 +331,7 @@ def menu():
     print("6-Incidência de doença por faixa etária")
     print("7-Numero de pessoas por intervalo de colestrol")
     print("8-Incidência de doença por nivel colestrol")
+    print("9-Visualizar gráficamente a informação")
     op = int(input())
     if op == 1:
         mapatotabela(pessoasPorGenero)
@@ -318,10 +349,8 @@ def menu():
         mapatotabela(dicColestrol)
     elif op == 8:
         mapatotabela(probabilidadeColestrois)
-    print("Regressar?[S/N]")
-    while(True):
-        op2 = (input())
-        if op2 == "S": menu()
-        if op2 == "N": exit()
+    elif op == 9:
+        graficamente()
+    regressar()
 
 menu()
