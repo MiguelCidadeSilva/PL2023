@@ -10,12 +10,15 @@ def parse(linha):
     linha = linha.lower()
     numeros = []
     posicao_on = -1  # posição da última ocorrência de "On"
-    posicao = 0
     soma = 0
+    dentro_sequencia = False  # controle se está dentro de uma sequência "On/Off"
     while True:
         on = linha.find("on", posicao_on + 1)
         if on == -1:
             break
+        if dentro_sequencia:  # se já está dentro de uma sequência, ignora essa "On"
+            posicao_on = on  # atualiza a posição da última ocorrência de "On"
+            continue
         off = linha.find("off", on)
         if off == -1:
             break
@@ -31,10 +34,12 @@ def parse(linha):
                     numero_atual = ""
                 if c == "=":
                     print(soma)
+                    soma = 0  # reinicia a soma para a próxima sequência
+                    dentro_sequencia = False  # marca como fora de uma sequência
         if numero_atual:
             numeros.append(numero_atual)
         posicao_on = on  # atualiza a posição da última ocorrência de "On"
-        posicao = off + 3
+        dentro_sequencia = True  # marca como dentro de uma sequência
     return numeros
 
 def vaiateprimeiraOcur(line,substring): #percorre uma string até à primeira ocurrencia de uma substring
