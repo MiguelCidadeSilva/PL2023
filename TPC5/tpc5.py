@@ -37,7 +37,7 @@ states = (
     ('CHAMADA', 'inclusive')
 )
 
-def t_ABORTAR(t):
+def t_ANY_ABORTAR(t):
     r'ABORTAR'
     global saldo
     saldo = 0
@@ -147,13 +147,6 @@ def t_CHAMADA_POUSAR(t):
     print(p)
     t.lexer.begin('INITIAL')
     return t
-
-def t_ANY_ABORTAR(t):
-    r'ABORTAR'
-    global saldo
-    saldo = 0
-    print("Retire as moedas.")
-    sys.exit()
 
 def t_INITIAL_ANY(t):
     r'.+'
