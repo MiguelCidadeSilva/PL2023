@@ -51,7 +51,7 @@ t_SEMICOLON = r';'
 
 # Funções para tokens mais complexos
 def t_MULTILINECOMMENTOPEN(t):
-    r'\/\*.*\n'
+    r'\/\*.*'
     return t
 
 def t_MULTILINECOMMENTCLOSE(t):
@@ -92,11 +92,11 @@ def t_PRINT(t):
     return t
 
 def t_COMMENT(t):
-    r'\/\/.*\n'
+    r'\/\/.*'
     return t
 
 def t_INLINECOMMENT(t):
-    r'--.*\n'
+    r'--.*'
     return t
 
 def t_RANGE(t):
